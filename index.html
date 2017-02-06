@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			body,img,canvas{
+				margin: 0;
+				padding: 0;
+			}
+			img{
+				width: 529px;
+				height: 156px;
+				position: absolute;
+				top: 250px;
+				left: 550px;
+				z-index: -1;
+			}
+			canvas{
+				margin-top: 250px;
+				margin-left: 550px;
+			}
+			p{
+				position: absolute;
+				top: 150px;
+				left: 620px;
+				font-size: 30px;
+				color: brown;
+				font-family: "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+			<p>谁是2016最活跃的的简书儿？</p>		
+			<img src="img/bibibi.png" />
+			<canvas id="canvas" width="529" height="156" style="border: 1px solid white;"></canvas>
+		
+		<script type="text/javascript">
+			var canvas=document.getElementById("canvas");
+			var context=canvas.getContext("2d");
+			//蒙布
+			context.beginPath();
+			context.fillStyle="grey";
+			context.fillRect(0,0,529,156);
+			context.closePath();
+			//start 刮
+			canvas.onmousedown=function()
+			{
+				canvas.onmousemove=function()
+				{
+					var x=event.clientX;
+					var y=event.clientY;
+					context.globalCompositeOperation="destination-out";
+					context.beginPath();
+					context.arc(x-550,y-250,20,0,Math.PI*2);
+					context.closePath();
+					context.fill();
+				}
+			}
+			canvas.onmouseup=function()
+			{
+				canvas.onmousemove=function(){
+					
+				}
+			}
+		</script>
+	</body>
+</html>
